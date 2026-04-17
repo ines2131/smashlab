@@ -1,17 +1,11 @@
-"use client";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
-  const router = useRouter();
-
   return (
     <div className="flex justify-between items-center px-6 py-4 border-b">
-      <div
-        className="font-bold text-lg cursor-pointer"
-        onClick={() => router.push("/")}
-      >
+      <Link href="/" className="font-bold text-lg cursor-pointer">
         SmashLab
-      </div>
+      </Link>
       <div className="flex gap-10 text-md">
         <span className="cursor-pointer">Tennis</span>
         <span className="cursor-pointer">Padel</span>
@@ -19,9 +13,13 @@ export default function Navbar() {
         <span className="cursor-pointer">Contact</span>
       </div>
       <div className="flex gap-4">
-        <span className="cursor-pointer">👤</span>
+        <Link href="/login" className="cursor-pointer">
+          👤
+        </Link>
         <span className="cursor-pointer">🔍</span>
-        <span className="cursor-pointer">🛒</span>
+        <Link href="/cart" className="cursor-pointer">
+          🛒
+        </Link>
       </div>
     </div>
   );
