@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ProductCard from "./ProductCard";
 
-export default function Home() {
+export default function Main() {
   return (
     <div>
       {/* Hero */}
