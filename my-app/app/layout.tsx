@@ -51,7 +51,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Navbar />
+
         {children}
       </body>
     </html>
