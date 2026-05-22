@@ -1,5 +1,5 @@
+import ProductCard from "@/components/main/ProductCard";
 import Image from "next/image";
-import ProductCard from "../ProductCard";
 
 export default function Main() {
   return (

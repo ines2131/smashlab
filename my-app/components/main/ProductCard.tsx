@@ -6,7 +6,7 @@ export default function ProductCard() {
   const router = useRouter();
   return (
     <div
-      onClick={() => router.push("/product-detail")}
+      onClick={() => router.push("/products/1")}
       className="cursor-pointer border p-4 rounded-md"
     >
       <div className="h-[150px] bg-gray-200 mb-2" />
