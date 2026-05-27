@@ -5,7 +5,8 @@ export default async function ProductPage() {
   // 나중에 MongoDB fetch로 교체 가능
 
   const product: Product = {
-    id: 1,
+    _id: "123",
+    productId: 1,
     name: "Yonex Vcore 100L",
     price: 180,
     image: "/racket.jpg",

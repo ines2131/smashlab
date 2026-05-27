@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       name: body.name,
       price: body.price,
       image: body.image,
-      quantity: body.quantity,
+      quantity: Number(body.quantity),
     });
 
     return NextResponse.json(cartItem);

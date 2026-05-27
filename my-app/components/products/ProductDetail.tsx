@@ -6,7 +6,7 @@ import { Product } from "@/types/product";
 
 import AddToCartButton from "./AddToCartButton";
 import PurchaseButton from "./PurchaseButton";
-import QuantitySelector from "./QantitySelector";
+import QuantitySelector from "../common/QuantitySelector";
 
 type Props = {
   product: Product;

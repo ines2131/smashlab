@@ -2,12 +2,18 @@ type Props = {
   quantity: number;
 
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
+
+  showLabel?: boolean;
 };
 
-export default function QuantitySelector({ quantity, setQuantity }: Props) {
+export default function QuantitySelector({
+  quantity,
+  setQuantity,
+  showLabel = true,
+}: Props) {
   return (
     <div>
-      <p className="text-sm mb-1">Quantity</p>
+      {showLabel && <p className="text-sm mb-1">Quantity</p>}
 
       <div className="flex items-center gap-3">
         <button
@@ -22,7 +28,7 @@ export default function QuantitySelector({ quantity, setQuantity }: Props) {
           min={1}
           value={quantity}
           onChange={(e) => setQuantity(Number(e.target.value))}
-          className="w-20 border rounded-md px-3 py-2 text-center"
+          className="w-14 h-10 border rounded-md px-3 py-2 text-center"
         />
 
         <button
