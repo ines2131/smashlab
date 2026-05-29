@@ -51,7 +51,7 @@ export const useCartStore = create<CartStore>((set) => ({
   updateCartQuantity: (id, quantity) =>
     set((state) => ({
       cart: state.cart.map((item) =>
-        item._id === id
+        item.cartItemId === id
           ? {
               ...item,
               quantity,
@@ -62,7 +62,7 @@ export const useCartStore = create<CartStore>((set) => ({
 
   removeCartItem: (id) =>
     set((state) => ({
-      cart: state.cart.filter((item) => item._id !== id),
+      cart: state.cart.filter((item) => item.cartItemId !== id),
     })),
 
   clearCart: () =>

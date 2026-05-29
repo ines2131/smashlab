@@ -6,10 +6,9 @@ export default async function ProductPage() {
 
   const product: Product = {
     _id: "123",
-    productId: 1,
     name: "Yonex Vcore 100L",
     price: 180,
-    image: "/racket.jpg",
+    image: "/blade.webp",
     description:
       "Lightweight racket designed for control and spin. Perfect for intermediate players.",
   };

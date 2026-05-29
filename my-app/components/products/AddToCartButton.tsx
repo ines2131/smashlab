@@ -18,7 +18,10 @@ export default function AddToCartButton({ product, quantity }: Props) {
     <Button
       onClick={() =>
         mutate({
-          product,
+          productId: product._id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
           quantity,
         })
       }

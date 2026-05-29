@@ -1,6 +1,15 @@
 export type CartItem = {
-  _id: string;
-  productId: number;
+  userId: string;
+  cartItemId: string;
+  productId: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
+
+export type AddToCartInput = {
+  productId: string;
   name: string;
   price: number;
   image: string;
@@ -8,6 +17,6 @@ export type CartItem = {
 };
 
 export type UpdateCartQuantityInput = {
-  _id: string;
+  cartItemId: string;
   quantity: number;
 };

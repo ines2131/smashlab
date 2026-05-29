@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "tsx scripts/seedProducts.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.11",
     "axios": "^1.16.0",
     "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
     "iron-session": "^8.0.4",
     "mongodb": "^7.1.1",
     "mongoose": "^9.6.1",
@@ -31,6 +33,7 @@
     "eslint-config-next": "16.2.3",
     "postcss": "^8.5.9",
     "tailwindcss": "^3.4.19",
+    "tsx": "^4.22.3",
     "typescript": "^5"
   }
 }

@@ -33,7 +33,7 @@ export default function CartList() {
         <div className="flex flex-col gap-4">
           {cart.map((item) => (
             <div
-              key={item._id}
+              key={item.cartItemId}
               className="flex items-center gap-6 border rounded-xl p-5"
             >
               {/* IMAGE */}
@@ -60,9 +60,11 @@ export default function CartList() {
                     typeof value === "function" ? value(item.quantity) : value;
 
                   mutate({
-                    _id: item._id,
+                    cartItemId: item.cartItemId,
                     quantity: newQuantity,
                   });
+
+                  console.log(newQuantity);
                 }}
                 showLabel={false}
               />
