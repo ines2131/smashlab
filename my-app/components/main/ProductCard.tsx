@@ -6,6 +6,8 @@ import Link from "next/link";
 export default function ProductCard() {
   const { data: products, isLoading, error } = useProducts();
 
+  console.log(products);
+
   if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>Failed to load products</p>;
@@ -15,7 +17,7 @@ export default function ProductCard() {
       {products?.map((product) => (
         <Link
           key={product._id}
-          href={`/product/${product._id}`}
+          href={`/products/${product._id}`}
           className="cursor-pointer border p-4 rounded-md"
         >
           <img

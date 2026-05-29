@@ -1,17 +1,12 @@
 import ProductDetail from "@/components/products/ProductDetail";
-import { Product } from "@/types/product";
 
-export default async function ProductPage() {
-  // 나중에 MongoDB fetch로 교체 가능
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-  const product: Product = {
-    _id: "123",
-    name: "Yonex Vcore 100L",
-    price: 180,
-    image: "/blade.webp",
-    description:
-      "Lightweight racket designed for control and spin. Perfect for intermediate players.",
-  };
-
-  return <ProductDetail product={product} />;
+export default async function ProductsPage({ params }: Props) {
+  const { id } = await params;
+  return <ProductDetail id={id} />;
 }

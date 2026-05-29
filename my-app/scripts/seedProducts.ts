@@ -37,6 +37,17 @@ const products = [
 
     description: "Spin-friendly racket used by Nadal.",
   },
+
+  {
+    name: "Head Speed",
+
+    price: 250,
+
+    image: "/speed.webp",
+
+    description:
+      "Perfect for all-court players looking for a good balance between power and control.",
+  },
 ];
 
 async function seed() {

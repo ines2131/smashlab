@@ -1,19 +1,28 @@
 "use client";
 
 import { useState } from "react";
-
-import { Product } from "@/types/product";
-
 import AddToCartButton from "./AddToCartButton";
 import PurchaseButton from "./PurchaseButton";
 import QuantitySelector from "../common/QuantitySelector";
+import { useProductById } from "@/hooks/useProductById";
 
 type Props = {
-  product: Product;
+  id: string;
 };
 
-export default function ProductDetail({ product }: Props) {
+export default function ProductDetail({ id }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
+
+  const { data: product, isLoading } = useProductById(id);
+  console.log(product);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!product) {
+    return <p>Product not found</p>;
+  }
 
   const totalPrice = product.price * quantity;
 
