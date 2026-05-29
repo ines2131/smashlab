@@ -1,6 +1,6 @@
 "use client";
 
-import { registerUser } from "@/services/auth.services";
+import { registerUser } from "@/services/authService";
 import { AuthFormData } from "@/types/auth";
 import { useRouter } from "next/navigation";
 import AuthForm from "./AuthForm";
