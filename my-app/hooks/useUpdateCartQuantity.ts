@@ -15,7 +15,7 @@ export function useUpdateCartQuantity() {
     mutationFn: updateCartQuantity,
 
     onSuccess: (updatedItem) => {
-      updateCartQuantityStore(updatedItem.cartItemId, updatedItem.quantity);
+      updateCartQuantityStore(updatedItem._id, updatedItem.quantity);
     },
   });
 }

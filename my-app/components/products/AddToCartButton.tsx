@@ -19,9 +19,6 @@ export default function AddToCartButton({ product, quantity }: Props) {
       onClick={() =>
         mutate({
           productId: product._id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
           quantity,
         })
       }

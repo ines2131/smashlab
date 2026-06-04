@@ -30,12 +30,14 @@ export async function POST(req: Request) {
     sessionOptions,
   );
 
-  console.log(session.user);
-
   session.user = {
     id: user._id.toString(),
     email: user.email,
   };
+
+  const userId = session.user.id;
+
+  console.log(userId);
 
   await session.save();
 

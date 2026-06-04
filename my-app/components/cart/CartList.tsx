@@ -20,7 +20,7 @@ export default function CartList() {
   const { mutate } = useUpdateCartQuantity();
 
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.productId.price * item.quantity,
     0,
   );
 
@@ -33,23 +33,23 @@ export default function CartList() {
         <div className="flex flex-col gap-4">
           {cart.map((item) => (
             <div
-              key={item.cartItemId}
+              key={item._id}
               className="flex items-center gap-6 border rounded-xl p-5"
             >
               {/* IMAGE */}
               <div className="w-28 h-28 bg-gray-100 rounded-lg overflow-hidden">
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.productId.image}
+                  alt={item.productId.name}
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* INFO */}
               <div className="flex-1">
-                <h2 className="font-semibold text-lg">{item.name}</h2>
+                <h2 className="font-semibold text-lg">{item.productId.name}</h2>
 
-                <p className="font-semibold mt-3">${item.price}</p>
+                <p className="font-semibold mt-3">${item.productId.price}</p>
               </div>
 
               {/* QUANTITY */}
@@ -60,7 +60,7 @@ export default function CartList() {
                     typeof value === "function" ? value(item.quantity) : value;
 
                   mutate({
-                    cartItemId: item.cartItemId,
+                    _id: item._id,
                     quantity: newQuantity,
                   });
 
@@ -71,7 +71,7 @@ export default function CartList() {
 
               {/* TOTAL */}
               <div className="w-24 text-right font-bold">
-                ${item.price * item.quantity}
+                ${item.productId.price * item.quantity}
               </div>
             </div>
           ))}

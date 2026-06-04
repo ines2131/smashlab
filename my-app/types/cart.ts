@@ -1,22 +1,24 @@
 export type CartItem = {
+  _id: string;
   userId: string;
-  cartItemId: string;
-  productId: string;
-  name: string;
-  price: number;
-  image: string;
+  productId: {
+    _id: string;
+
+    name: string;
+
+    price: number;
+
+    image: string;
+  };
   quantity: number;
 };
 
 export type AddToCartInput = {
   productId: string;
-  name: string;
-  price: number;
-  image: string;
   quantity: number;
 };
 
 export type UpdateCartQuantityInput = {
-  cartItemId: string;
+  _id: string;
   quantity: number;
 };

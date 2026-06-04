@@ -16,10 +16,10 @@ export async function getCartItems() {
 }
 
 export async function updateCartQuantity({
-  cartItemId,
+  _id,
   quantity,
 }: UpdateCartQuantityInput) {
-  const response = await axios.patch<CartItem>(`/api/cart/${cartItemId}`, {
+  const response = await axios.patch<CartItem>(`/api/cart/${_id}`, {
     quantity,
   });
   return response.data;
