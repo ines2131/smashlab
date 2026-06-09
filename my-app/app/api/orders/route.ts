@@ -2,7 +2,6 @@ import { requireUser } from "@/lib/auth";
 import { connectDB } from "@/lib/mongodb";
 import Cart from "@/models/Cart";
 import Order from "@/models/Order";
-import { useParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
