@@ -10,7 +10,7 @@ export function useCreateOrder() {
   return useMutation({
     mutationFn: createOrder,
     onSuccess: (order) => {
-      router.push(`/payment/mock-gateway?orderId=${order._id}`);
+      router.push(`/payment/mock-gateway/${order._id}`);
     },
   });
 }

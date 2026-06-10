@@ -8,6 +8,7 @@ export async function createOrder(data: CheckoutFormData) {
 
 export async function getOrderById(orderId: string) {
   const response = await axios.get(`/api/orders/${orderId}`);
+  console.log(response, "order");
   return response.data;
 }
 
@@ -15,6 +16,6 @@ export async function updateOrderStatus(
   orderId: string,
   status: "paid" | "failed",
 ) {
-  const response = await axios.patch(`api/orders/${orderId}`, { status });
+  const response = await axios.patch(`/api/orders/${orderId}`, { status });
   return response.data;
 }

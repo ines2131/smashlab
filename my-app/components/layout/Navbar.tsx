@@ -7,10 +7,10 @@ export default function Navbar() {
         SmashLab
       </Link>
       <div className="flex gap-10 text-md">
-        <span className="cursor-pointer">Tennis</span>
-        <span className="cursor-pointer">Padel</span>
-        <span className="cursor-pointer">Pickleball</span>
-        <span className="cursor-pointer">Contact</span>
+        <span className="cursor-pointer">Rackets</span>
+        <span className="cursor-pointer">Clothing</span>
+        <span className="cursor-pointer">Shoes</span>
+        <span className="cursor-pointer">Equipment</span>
       </div>
       <div className="flex gap-4">
         <Link href="/login" className="cursor-pointer">

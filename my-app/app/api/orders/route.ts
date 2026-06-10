@@ -2,6 +2,7 @@ import { requireUser } from "@/lib/auth";
 import { connectDB } from "@/lib/mongodb";
 import Cart from "@/models/Cart";
 import Order from "@/models/Order";
+import { generateOrderNumber } from "@/util/generateOrderNumber";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
     );
 
     const order = await Order.create({
+      orderNumber: generateOrderNumber(),
       userId: user.id,
 
       customer: {

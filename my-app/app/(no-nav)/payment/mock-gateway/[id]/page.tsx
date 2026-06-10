@@ -3,21 +3,21 @@
 import Button from "@/components/common/Button";
 import { useOrder } from "@/hooks/useOrder";
 import { useUpdateOrderStatus } from "@/hooks/useUpdateOrderStatus";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function MockGatewayPage() {
   const router = useRouter();
 
-  const searchParams = useSearchParams();
+  const params = useParams();
 
-  const orderId = searchParams.get("orderId") || "";
+  const orderId = params.id as string;
 
   const { data: order } = useOrder(orderId);
 
   const { mutate, isPending } = useUpdateOrderStatus();
 
   if (!order) {
-    return <div>No order found</div>;
+    return <div>Loading..</div>;
   }
 
   const handleSuccess = () => {
@@ -28,7 +28,7 @@ export default function MockGatewayPage() {
       },
       {
         onSuccess: () => {
-          router.push(`/payemnt-complete?orderId=${orderId}`);
+          router.push(`/payment-complete/${orderId}`);
         },
       },
     );
@@ -42,7 +42,7 @@ export default function MockGatewayPage() {
       },
       {
         onSuccess: () => {
-          `payment-failed?orderId=${orderId}`;
+          router.push(`/payment-failed/${orderId}`);
         },
       },
     );

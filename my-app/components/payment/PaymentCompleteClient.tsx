@@ -1,16 +1,16 @@
+"use client";
+import { useOrder } from "@/hooks/useOrder";
 import Link from "next/link";
 
-export default function PaymentComplete() {
-  // 👉 나중에 DB에서 가져올 데이터
-  const order = {
-    orderId: "SM123456",
-    date: new Date().toLocaleDateString(),
-    name: "Nana",
-    phone: "+852 1234 5678",
-    email: "nana@example.com",
-    total: 360,
-  };
+type Props = {
+  orderId: string;
+};
+export default function PaymentCompleteClient({ orderId }: Props) {
+  const { data: order } = useOrder(orderId);
 
+  if (!order) {
+    return <div>Loading..</div>;
+  }
   return (
     <div className="min-h-screen flex items-center justify-center px-6 bg-gray-50">
       <div className="bg-white shadow-lg rounded-xl p-10 w-full max-w-lg">
@@ -34,34 +34,36 @@ export default function PaymentComplete() {
         <div className="border rounded-lg p-5 space-y-3 text-sm">
           <div className="flex justify-between">
             <span className="text-gray-500">Order ID</span>
-            <span className="font-medium">{order.orderId}</span>
+            <span className="font-medium">{order.orderNumber}</span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Order Date</span>
-            <span className="font-medium">{order.date}</span>
+            <span className="font-medium">
+              {new Date(order.createdAt).toLocaleDateString()}
+            </span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Name</span>
-            <span className="font-medium">{order.name}</span>
+            <span className="font-medium">{order.customer.name}</span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Phone</span>
-            <span className="font-medium">{order.phone}</span>
+            <span className="font-medium">{order.customer.phone}</span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Email</span>
-            <span className="font-medium">{order.email}</span>
+            <span className="font-medium">{order.customer.email}</span>
           </div>
 
           <hr />
 
           <div className="flex justify-between text-base font-bold">
             <span>Total</span>
-            <span>${order.total}</span>
+            <span>${order.totalAmount}</span>
           </div>
         </div>
 

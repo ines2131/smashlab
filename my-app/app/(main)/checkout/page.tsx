@@ -17,7 +17,7 @@ export default function CheckoutPage() {
     address: "",
     phone: "",
     email: "",
-    paymentMethod: "card",
+    paymentMethod: "",
   });
 
   const totalAmount = cart.reduce(
