@@ -2,17 +2,18 @@ import { connectDB } from "@/lib/mongodb";
 import { Product } from "@/models/Product";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await connectDB();
     const products = await Product.find().lean();
 
-    const serializedProducts = products.map((product) => ({
-      ...product,
-      _id: product._id.toString(),
-    }));
-
-    return NextResponse.json(serializedProducts);
+    return NextResponse.json({
+      timestamp: Date.now(),
+      count: products.length,
+      products,
+    });
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to fetch products" },
