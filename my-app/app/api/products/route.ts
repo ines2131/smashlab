@@ -6,7 +6,13 @@ export async function GET() {
   try {
     await connectDB();
     const products = await Product.find().lean();
-    return NextResponse.json(products);
+
+    const serializedProducts = products.map((product) => ({
+      ...product,
+      _id: product._id.toString(),
+    }));
+
+    return NextResponse.json(serializedProducts);
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to fetch products" },

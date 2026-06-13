@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ProductCard() {
   const { data: products, isLoading, error } = useProducts();
 
-  console.log(products);
+  console.log(products, "products");
 
   if (isLoading) return <p>Loading...</p>;
 

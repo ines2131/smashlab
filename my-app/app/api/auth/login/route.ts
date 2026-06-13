@@ -35,10 +35,6 @@ export async function POST(req: Request) {
     email: user.email,
   };
 
-  const userId = session.user.id;
-
-  console.log(userId);
-
   await session.save();
 
   return NextResponse.json({
