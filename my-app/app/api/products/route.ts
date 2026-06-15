@@ -9,11 +9,7 @@ export async function GET() {
     await connectDB();
     const products = await Product.find().lean();
 
-    return NextResponse.json({
-      timestamp: Date.now(),
-      count: products.length,
-      products,
-    });
+    return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to fetch products" },
