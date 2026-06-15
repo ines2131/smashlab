@@ -17,8 +17,8 @@ export async function GET() {
     console.log("COUNT:", count);
 
     const products = await Product.find().lean();
-
-    console.log("PRODUCTS:", products);
+    console.log(products, "products");
+    return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to fetch products" },
