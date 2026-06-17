@@ -24,3 +24,9 @@ export async function updateCartQuantity({
   });
   return response.data;
 }
+
+export async function syncGuestCart(items: AddToCartInput[]) {
+  await axios.post("/api/cart/sync", {
+    items,
+  });
+}

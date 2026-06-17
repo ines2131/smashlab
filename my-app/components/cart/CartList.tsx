@@ -1,21 +1,18 @@
 "use client";
 
 import Button from "@/components/common/Button";
-
 import QuantitySelector from "@/components/common/QuantitySelector";
-
 import ProceedButton from "./ProceedButton";
-
 import { useCartStore } from "@/store/cartStore";
-
 import { useCart } from "@/hooks/useCart";
-
 import { useUpdateCartQuantity } from "@/hooks/useUpdateCartQuantity";
 
 export default function CartList() {
   useCart();
 
   const cart = useCartStore((state) => state.cart);
+
+  console.log(cart, "카트리스트아이템");
 
   const { mutate } = useUpdateCartQuantity();
 

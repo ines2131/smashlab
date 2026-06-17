@@ -9,17 +9,28 @@ import { useAddToCart } from "@/hooks/useAddToCart";
 type Props = {
   product: Product;
   quantity: number;
+  productId: string;
 };
 
-export default function AddToCartButton({ product, quantity }: Props) {
+export default function AddToCartButton({
+  product,
+  productId,
+  quantity,
+}: Props) {
   const { mutate, isPending } = useAddToCart();
 
   return (
     <Button
       onClick={() =>
         mutate({
-          productId: product._id,
+          productId,
           quantity,
+          product: {
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+          },
         })
       }
       variant="secondary"

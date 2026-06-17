@@ -32,8 +32,6 @@ export async function POST(request: NextRequest) {
     const user = await requireUser();
     const body = await request.json();
 
-    console.log(user, "userid");
-
     const existingCartItem = await Cart.findOne({
       userId: user.id,
       productId: body.productId,

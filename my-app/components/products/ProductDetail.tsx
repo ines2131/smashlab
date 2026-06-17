@@ -68,7 +68,11 @@ export default function ProductDetail({ id }: Props) {
 
         {/* 버튼 */}
         <div className="flex gap-3 mt-6">
-          <AddToCartButton product={product} quantity={quantity} />
+          <AddToCartButton
+            productId={product._id}
+            product={product}
+            quantity={quantity}
+          />
 
           <PurchaseButton />
         </div>
