@@ -1,4 +1,4 @@
-# SmashLab🎾
+# 🎾SmashLab
 A full-stack e-commerce web application built with **Next.js, MongoDB, and Iron Session**, focusing on real-world user flows, including:
 
 - Guest cart management
