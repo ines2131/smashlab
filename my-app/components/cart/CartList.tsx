@@ -12,8 +12,6 @@ export default function CartList() {
 
   const cart = useCartStore((state) => state.cart);
 
-  console.log(cart, "카트리스트아이템");
-
   const { mutate } = useUpdateCartQuantity();
 
   const subtotal = cart.reduce(
@@ -68,7 +66,7 @@ export default function CartList() {
 
               {/* TOTAL */}
               <div className="w-24 text-right font-bold">
-                ${item.productId.price * item.quantity}
+                ${item.product.price * item.quantity}
               </div>
             </div>
           ))}
