@@ -17,7 +17,7 @@ export default function CartList() {
   const { mutate } = useUpdateCartQuantity();
 
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.productId.price * item.quantity,
+    (acc, item) => acc + item.product.price * item.quantity,
     0,
   );
 
@@ -36,17 +36,17 @@ export default function CartList() {
               {/* IMAGE */}
               <div className="w-28 h-28 bg-gray-100 rounded-lg overflow-hidden">
                 <img
-                  src={item.productId.image}
-                  alt={item.productId.name}
+                  src={item.product.image}
+                  alt={item.product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* INFO */}
               <div className="flex-1">
-                <h2 className="font-semibold text-lg">{item.productId.name}</h2>
+                <h2 className="font-semibold text-lg">{item.product.name}</h2>
 
-                <p className="font-semibold mt-3">${item.productId.price}</p>
+                <p className="font-semibold mt-3">${item.product.price}</p>
               </div>
 
               {/* QUANTITY */}

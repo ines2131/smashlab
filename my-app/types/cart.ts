@@ -1,25 +1,20 @@
+import { Product } from "./product";
+
 export type CartItem = {
   _id: string;
   userId: string;
-  productId: {
-    _id: string;
-    name: string;
-    price: number;
-    image: string;
-  };
+  product: Product;
+  quantity: number;
+};
+
+export type GuestCartItme = {
+  product: Product;
   quantity: number;
 };
 
 export type AddToCartInput = {
-  productId: string;
+  product: Product;
   quantity: number;
-
-  product: {
-    _id: string;
-    name: string;
-    price: number;
-    image: string;
-  };
 };
 
 export type UpdateCartQuantityInput = {

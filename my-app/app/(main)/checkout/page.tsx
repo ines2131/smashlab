@@ -21,7 +21,7 @@ export default function CheckoutPage() {
   });
 
   const totalAmount = cart.reduce(
-    (acc, item) => acc + item.productId.price * item.quantity,
+    (acc, item) => acc + item.product.price * item.quantity,
     0,
   );
 
@@ -43,13 +43,13 @@ export default function CheckoutPage() {
             <div key={item._id} className="flex justify-between">
               <div>
                 {" "}
-                <p> {item.productId.name} </p>{" "}
+                <p> {item.product.name} </p>{" "}
                 <p className="text-sm text-gray-500">
                   {" "}
                   Qty: {item.quantity}{" "}
                 </p>{" "}
               </div>
-              <p> $ {(item.productId.price * item.quantity).toFixed(2)} </p>
+              <p> $ {(item.product.price * item.quantity).toFixed(2)} </p>
             </div>
           ))}
         </div>

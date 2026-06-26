@@ -17,10 +17,10 @@ export function useCart() {
         );
 
         const normalized = guestCart.map((item) => ({
-          _id: `guest-${item.productId}`,
+          _id: `guest-${item.product}`,
           userId: "guest",
 
-          productId: {
+          product: {
             _id: item.product._id,
             name: item.product.name,
             price: item.product.price,

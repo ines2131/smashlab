@@ -31,7 +31,7 @@ export function useAddToCart() {
       addCartItemToStore(savedCartItem);
 
       toast.success("Added to cart", {
-        description: savedCartItem.productId.name,
+        description: savedCartItem.product.name,
 
         action: {
           label: "View Cart",
