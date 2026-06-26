@@ -3,7 +3,7 @@ import { Product } from "./product";
 export type CartItem = {
   _id: string;
   userId: string;
-  product: Product;
+  product: CartProduct;
   quantity: number;
 };
 
@@ -20,4 +20,11 @@ export type AddToCartInput = {
 export type UpdateCartQuantityInput = {
   _id: string;
   quantity: number;
+};
+
+export type CartProduct = {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
 };

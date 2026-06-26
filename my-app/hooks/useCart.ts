@@ -33,7 +33,7 @@ export function useCart() {
       }
 
       const data = await getCartItems();
-      console.log(data, "싱크장바구니");
+
       return data;
     },
   });
