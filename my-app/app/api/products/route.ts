@@ -1,20 +1,40 @@
 import { connectDB } from "@/lib/mongodb";
 import { Product } from "@/models/Product";
-import mongoose from "mongoose";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
 
-    console.log("URI:", process.env.MONGODB_URI);
-    console.log("DB:", mongoose.connection.name);
+    const { searchParams } = new URL(request.url);
 
-    const count = await Product.countDocuments();
+    const category = searchParams.get("category");
+    const slug = searchParams.get("slug");
+    if (category && slug) {
+      const product = await Product.findOne({
+        category,
+        slug,
+      });
 
-    console.log("COUNT:", count);
+      if (!product) {
+        return NextResponse.json(
+          { message: "Product not found" },
+          { status: 404 },
+        );
+      }
+
+      return NextResponse.json(product);
+    }
+
+    if (category) {
+      const products = await Product.find({
+        category,
+      });
+
+      return NextResponse.json(products);
+    }
 
     const products = await Product.find().lean();
     console.log(products, "products");

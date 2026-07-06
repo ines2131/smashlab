@@ -13,12 +13,10 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    const cartItems = await Cart.find({ userId: user.id }).populate(
-      "productId",
-    );
+    const cartItems = await Cart.find({ userId: user.id }).populate("product");
 
     const totalAmount = cartItems.reduce(
-      (acc, item) => acc + item.productId.price * item.quantity,
+      (acc, item) => acc + item.product.price * item.quantity,
       0,
     );
 
@@ -34,9 +32,9 @@ export async function POST(request: NextRequest) {
       },
 
       items: cartItems.map((item) => ({
-        productId: item.productId._id,
+        product: item.product._id,
         quantity: item.quantity,
-        price: item.productId.price,
+        price: item.product.price,
       })),
 
       totalAmount,
@@ -52,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(order);
   } catch (error) {
-    console.error(error);
+    console.error(error, "체크아웃에러");
 
     return NextResponse.json(
       { message: "Failed to create order." },

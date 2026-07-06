@@ -4,15 +4,10 @@ import { CartItem } from "@/types/cart";
 
 type CartStore = {
   cart: CartItem[];
-
   setCart: (items: CartItem[]) => void;
-
   addCartItem: (item: CartItem) => void;
-
   updateCartQuantity: (id: string, quantity: number) => void;
-
   removeCartItem: (id: string) => void;
-
   clearCart: () => void;
 };
 
@@ -27,7 +22,7 @@ export const useCartStore = create<CartStore>((set) => ({
   addCartItem: (item) =>
     set((state) => {
       const existingItem = state.cart.find(
-        (cartItem) => cartItem.product === item.product,
+        (cartItem) => cartItem.product._id === item.product._id,
       );
 
       if (existingItem) {

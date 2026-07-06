@@ -1,17 +1,25 @@
 import Link from "next/link";
 import { ShoppingCart, Mail, User } from "lucide-react";
 export default function Navbar() {
+  const categories = ["rackets", "apparel", "footwear", "gear"];
+
   return (
     <div className="flex justify-between items-center px-6 py-4 border-b">
       <Link href="/" className="font-bold text-lg cursor-pointer">
-        SmashLab
+        SmashLab{" "}
       </Link>
       <div className="flex gap-10 text-md">
-        <span className="cursor-pointer">Rackets</span>
-        <span className="cursor-pointer">Apparel</span>
-        <span className="cursor-pointer">Footwear</span>
-        <span className="cursor-pointer">Gear</span>
+        {categories.map((category) => (
+          <Link
+            key={category}
+            href={`/products/${category}`}
+            className="cursor-pointer capitalize"
+          >
+            {category}
+          </Link>
+        ))}
       </div>
+
       <div className="flex gap-4">
         <Link href="/contact-us" className="cursor-pointer">
           <Mail />

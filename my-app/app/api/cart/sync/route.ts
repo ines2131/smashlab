@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
       const existing = await Cart.findOne({
         userId: user.id,
-        productId,
+        product: productId,
       });
 
       if (existing) {
@@ -30,14 +30,17 @@ export async function POST(request: NextRequest) {
       } else {
         await Cart.create({
           userId: user.id,
-          productId,
+          product: productId,
           quantity,
         });
       }
     }
-    return NextResponse.json({
-      message: "Cart synced successfully",
-    });
+
+    const updatedCart = await Cart.find({
+      userId: user.id,
+    }).populate("product");
+
+    return NextResponse.json(updatedCart);
   } catch (error) {
     console.error("cart sync error:", error);
 

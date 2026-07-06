@@ -1,5 +1,3 @@
-import { Product } from "./product";
-
 export type CartItem = {
   _id: string;
   userId: string;
@@ -8,12 +6,12 @@ export type CartItem = {
 };
 
 export type GuestCartItme = {
-  product: Product;
+  product: CartProduct;
   quantity: number;
 };
 
 export type AddToCartInput = {
-  product: Product;
+  product: CartProduct;
   quantity: number;
 };
 

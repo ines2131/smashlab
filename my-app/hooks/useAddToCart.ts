@@ -25,7 +25,12 @@ export function useAddToCart() {
 
     onSuccess: (savedCartItem) => {
       if (!savedCartItem) {
-        toast.success("Added to guest cart");
+        toast.success("Added to guest cart", {
+          action: {
+            label: "View Cart",
+            onClick: () => router.push("/cart"),
+          },
+        });
         return;
       }
       addCartItemToStore(savedCartItem);

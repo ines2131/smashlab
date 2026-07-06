@@ -12,9 +12,7 @@ export async function GET() {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const cartItems = await Cart.find({ userId: user.id }).populate(
-      "productId",
-    );
+    const cartItems = await Cart.find({ userId: user.id }).populate("product");
 
     return NextResponse.json(cartItems);
   } catch (error) {
@@ -34,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const existingCartItem = await Cart.findOne({
       userId: user.id,
-      productId: body.productId,
+      product: body.product._id,
     });
 
     // IF PRODUCT ALREADY EXISTS
@@ -47,7 +45,7 @@ export async function POST(request: NextRequest) {
     // CREATE NEW CART ITEM
     const cartItem = await Cart.create({
       userId: user.id,
-      productId: body.productId,
+      product: body.product._id,
       quantity: body.quantity,
     });
 

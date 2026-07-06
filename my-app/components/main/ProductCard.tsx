@@ -17,7 +17,7 @@ export default function ProductCard() {
       {products?.map((product) => (
         <Link
           key={product._id}
-          href={`/products/${product._id}`}
+          href={`/products/${product.category}/${product.slug}`}
           className="cursor-pointer border p-4 rounded-md"
         >
           <img

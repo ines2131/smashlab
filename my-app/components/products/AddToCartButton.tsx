@@ -1,22 +1,15 @@
 "use client";
 
 import Button from "@/components/common/Button";
-
-import { Product } from "@/types/product";
-
 import { useAddToCart } from "@/hooks/useAddToCart";
+import { CartProduct } from "@/types/cart";
 
 type Props = {
-  product: Product;
+  product: CartProduct;
   quantity: number;
-  productId: string;
 };
 
-export default function AddToCartButton({
-  product,
-  productId,
-  quantity,
-}: Props) {
+export default function AddToCartButton({ product, quantity }: Props) {
   const { mutate, isPending } = useAddToCart();
 
   return (

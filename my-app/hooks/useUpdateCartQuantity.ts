@@ -1,9 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-
 import { updateCartQuantity } from "@/services/cartService";
-
 import { useCartStore } from "@/store/cartStore";
 
 export function useUpdateCartQuantity() {
