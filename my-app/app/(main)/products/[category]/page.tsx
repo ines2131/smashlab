@@ -1,5 +1,5 @@
-import { getProductByCategory } from "@/services/productService";
 import ProductsByCategory from "@/components/products/ProductsByCategory";
+import { getProductByCategory } from "@/services/productService.server";
 
 type Props = {
   params: Promise<{ category: string }>;

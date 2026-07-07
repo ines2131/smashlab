@@ -4,25 +4,14 @@ import { useState } from "react";
 import AddToCartButton from "./AddToCartButton";
 import PurchaseButton from "./PurchaseButton";
 import QuantitySelector from "../common/QuantitySelector";
-import { useProductById } from "@/hooks/useProductById";
+import { Product } from "@/types/product";
 
 type Props = {
-  id: string;
+  product: Product;
 };
 
-export default function ProductDetail({ id }: Props) {
+export default function ProductDetail({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
-
-  const { data: product, isLoading } = useProductById(id);
-  console.log(product);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!product) {
-    return <p>Product not found</p>;
-  }
 
   const totalPrice = product.price * quantity;
 
@@ -68,11 +57,7 @@ export default function ProductDetail({ id }: Props) {
 
         {/* 버튼 */}
         <div className="flex gap-3 mt-6">
-          <AddToCartButton
-            productId={product._id}
-            product={product}
-            quantity={quantity}
-          />
+          <AddToCartButton product={product} quantity={quantity} />
 
           <PurchaseButton />
         </div>
