@@ -19,11 +19,11 @@ export default function ProductDetail({ product }: Props) {
     <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 gap-10">
       {/* LEFT */}
       <div className="flex flex-col items-center">
-        <div className="w-full max-w-md border rounded-lg p-6">
+        <div className="w-full max-w-md aspect-[4/5] border rounded-lg p-6 flex items-center justify-center">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full object-contain"
+            className="max-w-full max-h-full object-contain"
           />
         </div>
 

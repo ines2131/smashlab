@@ -5,7 +5,11 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between items-center px-6 py-4 border-b">
-      <Link href="/" className="font-bold text-lg cursor-pointer">
+      <Link
+        href="/"
+        className="font-bold flex gap-2 text-lg items-center cursor-pointer"
+      >
+        <img src="/logo.svg" alt="logo" className="w-[20px] h-[20px]" />
         SmashLab{" "}
       </Link>
       <div className="flex gap-10 text-md">

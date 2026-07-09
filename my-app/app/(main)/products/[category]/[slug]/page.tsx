@@ -1,3 +1,4 @@
+import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import ProductDetail from "@/components/products/ProductDetail";
 import { getProductBySlug } from "@/services/productService.server";
 import { notFound } from "next/navigation";
@@ -17,5 +18,20 @@ export default async function SlugPage({ params }: Props) {
     notFound();
   }
 
-  return <ProductDetail product={product} />;
+  return (
+    <>
+      <ViewItemTracker
+        product={{
+          sku: product.sku,
+          name: product.name,
+          brand: product.brand,
+          category: product.category,
+          subcategory: product.subcategory,
+          variant: product.variant,
+          price: product.price,
+        }}
+      />
+      <ProductDetail product={product} />;
+    </>
+  );
 }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="460" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1D0F3C"/>
+      <stop offset="1" stop-color="#0E0722"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="460" height="120" rx="20" fill="url(#bg)"/>
+
+  <!-- motion trail -->
+  <path d="M18 88 L44 62" stroke="#C6FF3D" stroke-width="6" stroke-linecap="round" opacity="0.35"/>
+  <path d="M26 98 L52 72" stroke="#C6FF3D" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- tennis ball icon -->
+  <circle cx="66" cy="58" r="34" fill="#C6FF3D"/>
+  <path d="M43 30 C56 39 56 77 43 86" fill="none" stroke="#F5F3FF" stroke-width="5.6" stroke-linecap="round"/>
+  <path d="M89 30 C76 39 76 77 89 86" fill="none" stroke="#F5F3FF" stroke-width="5.6" stroke-linecap="round"/>
+
+  <!-- wordmark -->
+  <text x="122" y="76" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="46" fill="#F5F3FF">Smash<tspan fill="#C6FF3D">Lab</tspan></text>
+</svg>
