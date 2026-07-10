@@ -5,12 +5,14 @@ import AddToCartButton from "./AddToCartButton";
 import PurchaseButton from "./PurchaseButton";
 import QuantitySelector from "../common/QuantitySelector";
 import { Product } from "@/types/product";
+import { TrackableProduct } from "@/types/cart";
 
 type Props = {
   product: Product;
+  trackingData: TrackableProduct;
 };
 
-export default function ProductDetail({ product }: Props) {
+export default function ProductDetail({ product, trackingData }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
 
   const totalPrice = product.price * quantity;
@@ -42,22 +44,16 @@ export default function ProductDetail({ product }: Props) {
 
         <p className="text-gray-500 text-sm">{product.description}</p>
 
-        {/* 옵션 */}
-        <div className="mt-4">
-          <p className="text-sm mb-1">Grip Size</p>
-
-          <select className="border rounded-md px-3 py-2 w-40">
-            <option>G2</option>
-            <option>G3</option>
-          </select>
-        </div>
-
         {/* 수량 */}
         <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
 
         {/* 버튼 */}
         <div className="flex gap-3 mt-6">
-          <AddToCartButton product={product} quantity={quantity} />
+          <AddToCartButton
+            product={product}
+            quantity={quantity}
+            trackingData={trackingData}
+          />
 
           <PurchaseButton />
         </div>

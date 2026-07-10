@@ -1,6 +1,7 @@
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import ProductDetail from "@/components/products/ProductDetail";
 import { getProductBySlug } from "@/services/productService.server";
+import { TrackableProduct } from "@/types/cart";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -18,20 +19,20 @@ export default async function SlugPage({ params }: Props) {
     notFound();
   }
 
+  const trackingData: TrackableProduct = {
+    sku: product.sku,
+    name: product.name,
+    brand: product.brand,
+    category: product.category,
+    subcategory: product.subcategory,
+    variant: product.variant,
+    price: product.price,
+  };
+
   return (
     <>
-      <ViewItemTracker
-        product={{
-          sku: product.sku,
-          name: product.name,
-          brand: product.brand,
-          category: product.category,
-          subcategory: product.subcategory,
-          variant: product.variant,
-          price: product.price,
-        }}
-      />
-      <ProductDetail product={product} />;
+      <ViewItemTracker product={trackingData} />
+      <ProductDetail trackingData={trackingData} product={product} />;
     </>
   );
 }

@@ -26,3 +26,13 @@ export type CartProduct = {
   price: number;
   image: string;
 };
+
+export type TrackableProduct = {
+  sku: string;
+  name: string;
+  brand: string;
+  category: string;
+  subcategory?: string;
+  variant?: string;
+  price: number;
+};
