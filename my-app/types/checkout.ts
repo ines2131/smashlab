@@ -3,5 +3,7 @@ export type CheckoutFormData = {
   address: string;
   phone: string;
   email: string;
-  paymentMethod: "card" | "bank" | "";
+  paymentMethod: PaymentMethod;
 };
+
+export type PaymentMethod = "" | "card" | "bank";

@@ -1,6 +1,7 @@
 "use client";
 
 import CheckoutForm from "@/components/checkout/CheckoutForm";
+import OrderSummary from "@/components/checkout/OrderSummary";
 import PlaceOrderButton from "@/components/checkout/PlaceOrderButton";
 import { useCart } from "@/hooks/useCart";
 import { useCartStore } from "@/store/cartStore";
@@ -30,37 +31,22 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="grid gap-8 md:grid-cols-2">
-      <div className="rounded-lg border p-6">
-        <h2 className="mb-4 text-xl font-semibold">Billing Details</h2>
-        <CheckoutForm form={form} setForm={setForm} />
-      </div>
+    <div>
+      <div className="mx-auto max-w-6xl px-4 py-10">
+        <h1 className="mb-8 text-2xl font-bold tracking-tight">Checkout</h1>
+        <div className="grid gap-8 md:grid-cols-2">
+          <section className="rounded-xl border bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold">Shipping Info</h2>
+            <CheckoutForm form={form} setForm={setForm} />
+          </section>
 
-      <div className="rounded-lg border p-6">
-        <h2 className="mb-4 text-xl font-semibold">Order Summary</h2>
-        <div className="space-y-3">
-          {cart.map((item) => (
-            <div key={item._id} className="flex justify-between">
-              <div>
-                {" "}
-                <p> {item.product.name} </p>{" "}
-                <p className="text-sm text-gray-500">
-                  {" "}
-                  Qty: {item.quantity}{" "}
-                </p>{" "}
-              </div>
-              <p> $ {(item.product.price * item.quantity).toFixed(2)} </p>
+          <section className="rounded-xl border bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold">Order Summary</h2>
+            <OrderSummary cart={cart} totalAmount={totalAmount} />
+            <div className="mt-6">
+              <PlaceOrderButton form={form} />
             </div>
-          ))}
-        </div>
-        <hr className="my-4" />{" "}
-        <div className="flex justify-between font-bold">
-          {" "}
-          <span>Total</span> <span> $ {totalAmount.toFixed(2)} </span>{" "}
-        </div>{" "}
-        <div className="mt-6">
-          {" "}
-          <PlaceOrderButton form={form} />{" "}
+          </section>
         </div>
       </div>
     </div>
