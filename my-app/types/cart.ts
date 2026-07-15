@@ -20,6 +20,11 @@ export type CartProduct = {
   name: string;
   price: number;
   image: string;
+  sku: string;
+  brand: string;
+  category: string;
+  subcategory?: string;
+  variant?: string;
 };
 
 export type TrackableProduct = {
