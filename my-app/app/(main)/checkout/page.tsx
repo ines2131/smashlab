@@ -4,7 +4,7 @@ import CheckoutForm from "@/components/checkout/CheckoutForm";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import PlaceOrderButton from "@/components/checkout/PlaceOrderButton";
 import { useCart } from "@/hooks/useCart";
-import { trackBeginCheckout } from "@/lib/gtm/ecommerce";
+import { trackBeginCheckout } from "@/lib/tracking/ecommerce";
 import { useCartStore } from "@/store/cartStore";
 import { CheckoutFormData } from "@/types/checkout";
 import { useEffect, useRef, useState } from "react";
@@ -13,7 +13,6 @@ export default function CheckoutPage() {
   const { isLoading } = useCart();
 
   const cart = useCartStore((state) => state.cart);
-  console.log("store cart:", cart);
 
   const [form, setForm] = useState<CheckoutFormData>({
     name: "",

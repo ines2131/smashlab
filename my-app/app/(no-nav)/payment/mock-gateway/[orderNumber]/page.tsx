@@ -3,6 +3,7 @@
 import Button from "@/components/common/Button";
 import { useOrder } from "@/hooks/useOrder";
 import { useUpdateOrderStatus } from "@/hooks/useUpdateOrderStatus";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 
 export default function MockGatewayPage() {
@@ -10,11 +11,13 @@ export default function MockGatewayPage() {
 
   const params = useParams();
 
-  const orderId = params.id as string;
+  const orderNumber = params.orderNumber as string;
 
-  const { data: order } = useOrder(orderId);
+  const { data: order } = useOrder(orderNumber);
 
   const { mutate, isPending } = useUpdateOrderStatus();
+
+  const queryClient = useQueryClient();
 
   if (!order) {
     return <div>Loading..</div>;
@@ -23,12 +26,13 @@ export default function MockGatewayPage() {
   const handleSuccess = () => {
     mutate(
       {
-        orderId,
+        orderNumber,
         status: "paid",
       },
       {
         onSuccess: () => {
-          router.push(`/payment-complete/${orderId}`);
+          queryClient.invalidateQueries({ queryKey: ["order", orderNumber] });
+          router.push(`/payment-complete/${orderNumber}`);
         },
       },
     );
@@ -37,12 +41,13 @@ export default function MockGatewayPage() {
   const handleFailed = () => {
     mutate(
       {
-        orderId,
+        orderNumber,
         status: "failed",
       },
       {
         onSuccess: () => {
-          router.push(`/payment-failed/${orderId}`);
+          queryClient.invalidateQueries({ queryKey: ["order", orderNumber] });
+          router.push(`/payment-failed/${orderNumber}`);
         },
       },
     );
@@ -51,7 +56,7 @@ export default function MockGatewayPage() {
   return (
     <>
       <div className="rounded-lg border p-6">
-        <p>Order ID:{order._id}</p>
+        <p>Order ID:{order.orderNumber}</p>
         <p>Total : ${order.totalAmount.toFixed(2)}</p>
         <p>Payment Method: {order.paymentMethod}</p>
         <p> Status: {order.status} </p>

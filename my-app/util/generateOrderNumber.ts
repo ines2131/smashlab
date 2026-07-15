@@ -1,5 +1,9 @@
-export function generateOrderNumber() {
-  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+import crypto from "crypto";
 
-  return `SM-${random}`;
+export function generateOrderNumber() {
+  const random = crypto.randomBytes(4).toString("hex").toUpperCase();
+
+  const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+
+  return `SM-${datePart}-${random}`;
 }

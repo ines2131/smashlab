@@ -2,7 +2,7 @@
 
 import Button from "@/components/common/Button";
 import { useAddToCart } from "@/hooks/useAddToCart";
-import { trackAddToCart } from "@/lib/gtm/ecommerce";
+import { trackAddToCart } from "@/lib/tracking/ecommerce";
 import { CartProduct, TrackableProduct } from "@/types/cart";
 
 type Props = {

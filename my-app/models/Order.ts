@@ -5,6 +5,7 @@ const OrderSchema = new mongoose.Schema(
     orderNumber: {
       type: String,
       required: true,
+      unique: true,
     },
     userId: {
       type: String,
@@ -46,6 +47,11 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "paid", "failed", "refunded"],
       default: "pending",
+    },
+
+    purchasedTracked: {
+      type: Boolean,
+      default: false,
     },
   },
   {

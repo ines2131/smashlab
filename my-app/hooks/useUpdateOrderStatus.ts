@@ -4,11 +4,11 @@ import { useMutation } from "@tanstack/react-query";
 export function useUpdateOrderStatus() {
   return useMutation({
     mutationFn: ({
-      orderId,
+      orderNumber,
       status,
     }: {
-      orderId: string;
+      orderNumber: string;
       status: "paid" | "failed";
-    }) => updateOrderStatus(orderId, status),
+    }) => updateOrderStatus(orderNumber, status),
   });
 }

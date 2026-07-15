@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     }
 
     const products = await Product.find().lean();
-    console.log(products, "products");
+
     return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json(

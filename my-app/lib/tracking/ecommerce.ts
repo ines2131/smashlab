@@ -1,5 +1,6 @@
 import { CartItem, CartProduct } from "@/types/cart";
 import { pushToDataLayer } from "./dataLayer";
+import Order from "@/models/Order";
 
 const CURRENCY = "HKD";
 
@@ -18,10 +19,21 @@ type TrackableItem = {
   quantity: number;
 };
 
+export type TrackableOrderItem = {
+  product: TrackableProduct;
+  quantity: number;
+};
+
+export type TrackableOrder = {
+  orderNumber: string;
+  totalAmount: number;
+  items: TrackableOrderItem[];
+};
+
 function buildGa4Item({ product, quantity }: TrackableItem, index?: number) {
   return {
     item_id: product.sku,
-    item_namme: product.name,
+    item_name: product.name,
     price: product.price,
     quantity,
     ...(product.brand && { item_brand: product.brand }),
@@ -36,6 +48,7 @@ function pushEcommerceEvent(
   event: string,
   value: number,
   items: ReturnType<typeof buildGa4Item>[],
+  transaction_id?: string,
 ) {
   pushToDataLayer({ ecommerce: null });
   pushToDataLayer({
@@ -44,6 +57,7 @@ function pushEcommerceEvent(
       currency: CURRENCY,
       value,
       items,
+      ...(transaction_id && { transaction_id }),
     },
   });
 }
@@ -87,5 +101,14 @@ export function trackBeginCheckout(cart: CartItem[]) {
     "begin_checkout",
     value,
     items.map((item, index) => buildGa4Item(item, index)),
+  );
+}
+
+export function trackPurchase(order: TrackableOrder) {
+  pushEcommerceEvent(
+    "purchase",
+    order.totalAmount,
+    order.items.map((item, index) => buildGa4Item(item, index)),
+    order.orderNumber,
   );
 }

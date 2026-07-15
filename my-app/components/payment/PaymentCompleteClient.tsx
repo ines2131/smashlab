@@ -1,12 +1,34 @@
 "use client";
 import { useOrder } from "@/hooks/useOrder";
+import { trackOrderPurchase } from "@/lib/tracking/orderTracking";
+import { trackPurchaseApi } from "@/services/orderService";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 type Props = {
-  orderId: string;
+  orderNumber: string;
 };
-export default function PaymentCompleteClient({ orderId }: Props) {
-  const { data: order } = useOrder(orderId);
+export default function PaymentCompleteClient({ orderNumber }: Props) {
+  const { data: order } = useOrder(orderNumber, { forceFresh: true });
+  const hasAttemptedTracking = useRef(false);
+
+  useEffect(() => {
+    if (!order || order.status !== "paid") {
+      return;
+    }
+    if (hasAttemptedTracking.current) return;
+
+    hasAttemptedTracking.current = true;
+
+    trackPurchaseApi(orderNumber)
+      .then((result) => {
+        if (!result.tracked || !result.order) return;
+        trackOrderPurchase(result.order);
+      })
+      .catch((error) => {
+        console.error("purchase tracking failed:", error);
+      });
+  }, [order, orderNumber]);
 
   if (!order) {
     return <div>Loading..</div>;

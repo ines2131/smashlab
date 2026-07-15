@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(order);
   } catch (error) {
-    console.error(error, "체크아웃에러");
+    console.error(error, "checkout error");
 
     return NextResponse.json(
       { message: "Failed to create order." },

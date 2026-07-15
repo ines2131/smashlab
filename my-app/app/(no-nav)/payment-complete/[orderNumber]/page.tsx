@@ -3,8 +3,8 @@ import PaymentCompleteClient from "@/components/payment/PaymentCompleteClient";
 export default async function PaymentCompletePage({
   params,
 }: {
-  params: { id: string };
+  params: { orderNumber: string };
 }) {
-  const { id } = await params;
-  return <PaymentCompleteClient orderId={id} />;
+  const { orderNumber } = await params;
+  return <PaymentCompleteClient orderNumber={orderNumber} />;
 }

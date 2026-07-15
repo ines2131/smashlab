@@ -59,7 +59,7 @@ export default function CartList() {
                     quantity: newQuantity,
                   });
 
-                  console.log(newQuantity);
+               
                 }}
                 showLabel={false}
               />

@@ -14,7 +14,18 @@ export async function GET() {
 
     const cartItems = await Cart.find({ userId: user.id }).populate("product");
 
-    return NextResponse.json(cartItems);
+    // 상품이 삭제되어 참조가 깨진 cart item 분리
+    const validItems = cartItems.filter((item) => item.product != null);
+    const orphanIds = cartItems
+      .filter((item) => item.product == null)
+      .map((item) => item._id);
+
+    // DB에 남아있는 고아 cart row 정리 (실패해도 응답에는 영향 없도록 분리)
+    if (orphanIds.length > 0) {
+      await Cart.deleteMany({ _id: { $in: orphanIds } });
+    }
+
+    return NextResponse.json(validItems);
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to fetch cart items." },
