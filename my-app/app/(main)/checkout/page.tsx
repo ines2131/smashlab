@@ -4,14 +4,16 @@ import CheckoutForm from "@/components/checkout/CheckoutForm";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import PlaceOrderButton from "@/components/checkout/PlaceOrderButton";
 import { useCart } from "@/hooks/useCart";
+import { trackBeginCheckout } from "@/lib/gtm/ecommerce";
 import { useCartStore } from "@/store/cartStore";
 import { CheckoutFormData } from "@/types/checkout";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CheckoutPage() {
   const { isLoading } = useCart();
 
   const cart = useCartStore((state) => state.cart);
+  console.log("store cart:", cart);
 
   const [form, setForm] = useState<CheckoutFormData>({
     name: "",
@@ -25,6 +27,14 @@ export default function CheckoutPage() {
     (acc, item) => acc + item.product.price * item.quantity,
     0,
   );
+
+  const hasTrackedRef = useRef(false);
+  useEffect(() => {
+    if (!isLoading && cart.length > 0 && !hasTrackedRef.current) {
+      trackBeginCheckout(cart);
+      hasTrackedRef.current = true;
+    }
+  }, [isLoading, cart, totalAmount]);
 
   if (isLoading) {
     return <div>Loading....</div>;

@@ -17,16 +17,9 @@ export function useCart() {
         );
 
         const normalized = guestCart.map((item) => ({
-          _id: `guest-${item.product}`,
+          _id: `guest-${item.product._id}`,
           userId: "guest",
-
-          product: {
-            _id: item.product._id,
-            name: item.product.name,
-            price: item.product.price,
-            image: item.product.image,
-          },
-
+          product: item.product,
           quantity: item.quantity,
         }));
         return normalized;

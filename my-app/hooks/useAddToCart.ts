@@ -3,7 +3,7 @@
 import { addCartItem } from "@/services/cartService";
 import { useCartStore } from "@/store/cartStore";
 import { AddToCartInput, CartItem } from "@/types/cart";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCurrentUser } from "./useCurrentUser";
@@ -11,6 +11,7 @@ import { saveGuestCart } from "@/util/saveGuestCart";
 
 export function useAddToCart() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const addCartItemToStore = useCartStore((state) => state.addCartItem);
   const { data: user } = useCurrentUser();
 
@@ -34,6 +35,8 @@ export function useAddToCart() {
         return;
       }
       addCartItemToStore(savedCartItem);
+
+      queryClient.invalidateQueries({ queryKey: ["cart", user?.id] });
 
       toast.success("Added to cart", {
         description: savedCartItem.product.name,

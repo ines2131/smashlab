@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160">
+  <defs>
+    <linearGradient id="smashGrad" x1="20%" y1="20%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#FF5A1F"/>
+      <stop offset="100%" stop-color="#8A2A0A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- mark -->
+  <g transform="translate(20,20)">
+    <rect x="0" y="0" width="120" height="120" rx="26" fill="#14171A"/>
+    <circle cx="33.6" cy="33.6" r="10.8" fill="#FF5A1F"/>
+    <path d="M 39.6 39.6 L 62.4 60 L 96 94.8"
+          fill="none"
+          stroke="url(#smashGrad)"
+          stroke-width="14.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark: for on-screen use, outline this text to paths before shipping to production -->
+  <text x="168" y="100"
+        font-family="'Poppins','Segoe UI',Arial,sans-serif"
+        font-weight="700"
+        font-size="66"
+        letter-spacing="-1.5">
+    <tspan fill="#14171A">Smash</tspan><tspan fill="#FF5A1F">Lab</tspan>
+  </text>
+</svg>

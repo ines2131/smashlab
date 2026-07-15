@@ -5,11 +5,6 @@ export type CartItem = {
   quantity: number;
 };
 
-export type GuestCartItme = {
-  product: CartProduct;
-  quantity: number;
-};
-
 export type AddToCartInput = {
   product: CartProduct;
   quantity: number;

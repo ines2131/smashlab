@@ -9,8 +9,7 @@ export default function Navbar() {
         href="/"
         className="font-bold flex gap-2 text-lg items-center cursor-pointer"
       >
-        <img src="/logo.svg" alt="logo" className="w-[20px] h-[20px]" />
-        SmashLab{" "}
+        <img src="/logo-orange.svg" alt="logo" className="w-[200px] h-[50px]" />
       </Link>
       <div className="flex gap-10 text-md">
         {categories.map((category) => (

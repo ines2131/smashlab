@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
     if (existingCartItem) {
       existingCartItem.quantity += Number(body.quantity);
       await existingCartItem.save();
+      await existingCartItem.populate("product");
       return NextResponse.json(existingCartItem);
     }
 
@@ -49,6 +50,7 @@ export async function POST(request: NextRequest) {
       quantity: body.quantity,
     });
 
+    await cartItem.populate("product");
     return NextResponse.json(cartItem);
   } catch (error) {
     console.error("post", error);

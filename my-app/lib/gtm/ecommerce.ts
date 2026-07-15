@@ -1,14 +1,7 @@
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
-}
+import { CartItem, CartProduct } from "@/types/cart";
+import { pushToDataLayer } from "./dataLayer";
 
-function pushToDataLayer(data: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(data);
-}
+const CURRENCY = "HKD";
 
 export type TrackableProduct = {
   sku: string;
@@ -20,48 +13,79 @@ export type TrackableProduct = {
   price: number;
 };
 
-export function trackViewItem(product: TrackableProduct) {
-  pushToDataLayer({ eecommerce: null });
+type TrackableItem = {
+  product: TrackableProduct;
+  quantity: number;
+};
+
+function buildGa4Item({ product, quantity }: TrackableItem, index?: number) {
+  return {
+    item_id: product.sku,
+    item_namme: product.name,
+    price: product.price,
+    quantity,
+    ...(product.brand && { item_brand: product.brand }),
+    ...(product.category && { item_category: product.category }),
+    ...(product.subcategory && { item_category2: product.subcategory }),
+    ...(product.variant && { item_variant: product.variant }),
+    ...(index !== undefined && { index }),
+  };
+}
+
+function pushEcommerceEvent(
+  event: string,
+  value: number,
+  items: ReturnType<typeof buildGa4Item>[],
+) {
+  pushToDataLayer({ ecommerce: null });
   pushToDataLayer({
-    event: "view_item",
+    event,
     ecommerce: {
-      currency: "HKD",
-      value: product.price,
-      items: [
-        {
-          item_id: product.sku,
-          item_name: product.name,
-          item_brand: product.brand,
-          item_category: product.category,
-          ...(product.subcategory && { item_category2: product.subcategory }),
-          ...(product.variant && { item_variant: product.variant }),
-          price: product.price,
-          quantity: 1,
-        },
-      ],
+      currency: CURRENCY,
+      value,
+      items,
     },
   });
 }
 
+export function trackViewItem(product: TrackableProduct) {
+  pushEcommerceEvent("view_item", product.price, [
+    buildGa4Item({ product, quantity: 1 }),
+  ]);
+}
+
 export function trackAddToCart(product: TrackableProduct, quantity: number) {
-  pushToDataLayer({ eecommerce: null });
-  pushToDataLayer({
-    event: "add_to_cart",
-    ecommerce: {
-      currency: "HKD",
-      value: product.price * quantity,
-      items: [
-        {
-          item_id: product.sku,
-          item_name: product.name,
-          item_brand: product.brand,
-          item_category: product.category,
-          ...(product.subcategory && { item_category2: product.subcategory }),
-          ...(product.variant && { item_variant: product.variant }),
-          price: product.price,
-          quantity: quantity,
-        },
-      ],
-    },
-  });
+  pushEcommerceEvent("add_to_cart", product.price * quantity, [
+    buildGa4Item({ product, quantity }),
+  ]);
+}
+
+function cartProductToTrackable(product: CartProduct): TrackableProduct {
+  return {
+    sku: product.sku,
+    name: product.name,
+    price: product.price,
+    brand: product.brand,
+    category: product.category,
+    subcategory: product.subcategory,
+    variant: product.variant,
+  };
+}
+
+export function trackBeginCheckout(cart: CartItem[]) {
+  const items = cart.map(({ product, quantity }) => ({
+    product: cartProductToTrackable(product),
+    quantity,
+  }));
+
+  const value = items.reduce(
+    (acc, { product, quantity }) => acc + product.price * quantity,
+    0,
+  );
+
+  pushEcommerceEvent(
+    "begin_checkout",
+    value,
+    items.map((item, index) => buildGa4Item(item, index)),
+  );
 }
