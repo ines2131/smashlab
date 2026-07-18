@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
 import { useOrder } from "@/hooks/useOrder";
 import { useUpdateOrderStatus } from "@/hooks/useUpdateOrderStatus";
 import { useQueryClient } from "@tanstack/react-query";
@@ -20,7 +21,11 @@ export default function MockGatewayPage() {
   const queryClient = useQueryClient();
 
   if (!order) {
-    return <div>Loading..</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <Spinner />
+      </div>
+    );
   }
 
   const handleSuccess = () => {

@@ -2,11 +2,17 @@
 
 import { useProducts } from "@/hooks/useProducts";
 import Link from "next/link";
+import Spinner from "../common/Spinner";
 
 export default function ProductCard() {
   const { data: products, isLoading, error } = useProducts();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <Spinner />
+      </div>
+    );
 
   if (error) return <p>Failed to load products</p>;
 

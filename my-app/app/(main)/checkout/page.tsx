@@ -3,6 +3,7 @@
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import PlaceOrderButton from "@/components/checkout/PlaceOrderButton";
+import Spinner from "@/components/common/Spinner";
 import { useCart } from "@/hooks/useCart";
 import { trackBeginCheckout } from "@/lib/tracking/ecommerce";
 import { useCartStore } from "@/store/cartStore";
@@ -36,7 +37,11 @@ export default function CheckoutPage() {
   }, [isLoading, cart, totalAmount]);
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

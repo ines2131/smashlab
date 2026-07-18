@@ -20,6 +20,7 @@ export default function AddToCartButton({
 
   return (
     <Button
+      id="add_to_cart_btn"
       onClick={() =>
         mutate(
           {

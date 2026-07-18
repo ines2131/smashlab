@@ -4,6 +4,7 @@ import { trackOrderPurchase } from "@/lib/tracking/orderTracking";
 import { trackPurchaseApi } from "@/services/orderService";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import Spinner from "../common/Spinner";
 
 type Props = {
   orderNumber: string;
@@ -31,7 +32,11 @@ export default function PaymentCompleteClient({ orderNumber }: Props) {
   }, [order, orderNumber]);
 
   if (!order) {
-    return <div>Loading..</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <Spinner />
+      </div>
+    );
   }
   return (
     <div className="min-h-screen flex items-center justify-center px-6 bg-gray-50">
@@ -56,7 +61,9 @@ export default function PaymentCompleteClient({ orderNumber }: Props) {
         <div className="border rounded-lg p-5 space-y-3 text-sm">
           <div className="flex justify-between">
             <span className="text-gray-500">Order ID</span>
-            <span className="font-medium">{order.orderNumber}</span>
+            <span id="orrder_number" className="font-medium">
+              {order.orderNumber}
+            </span>
           </div>
 
           <div className="flex justify-between">
@@ -73,19 +80,23 @@ export default function PaymentCompleteClient({ orderNumber }: Props) {
 
           <div className="flex justify-between">
             <span className="text-gray-500">Phone</span>
-            <span className="font-medium">{order.customer.phone}</span>
+            <span id="payment_complete_phone" className="font-medium">
+              {order.customer.phone}
+            </span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Email</span>
-            <span className="font-medium">{order.customer.email}</span>
+            <span id="payment_complete_email" className="font-medium">
+              {order.customer.email}
+            </span>
           </div>
 
           <hr />
 
           <div className="flex justify-between text-base font-bold">
             <span>Total</span>
-            <span>${order.totalAmount}</span>
+            <span id="payment_complete_total_price">${order.totalAmount}</span>
           </div>
         </div>
 
