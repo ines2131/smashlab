@@ -4,6 +4,7 @@ import { registerUser } from "@/services/authService";
 import { AuthFormData } from "@/types/auth";
 import { useRouter } from "next/navigation";
 import AuthForm from "./AuthForm";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function RegisterForm() {
       password: data.password,
     });
 
-    alert("Register success");
+    toast.success("Register successful");
     router.push("/login");
   };
 

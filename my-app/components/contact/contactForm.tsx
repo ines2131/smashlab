@@ -5,6 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { submitContactForm } from "@/services/contactService";
 import { toast } from "sonner";
 import Button from "../common/Button";
+import { gtmFormEvent } from "@/lib/tracking/gtm";
+
+const FORM_ID = "contactus_form";
+const FORM_NAME = "contact_form";
 
 export default function ContactForm() {
   const {
@@ -21,9 +25,20 @@ export default function ContactForm() {
       await submitContactForm(data);
       toast.success("Message sent!");
 
+      gtmFormEvent("contact_form_submit", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        form_destination: window.location.pathname,
+      });
+
       reset();
     } catch (error) {
       toast.error("Failed to send message");
+
+      gtmFormEvent("contact_form_submit_error", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+      });
     }
   };
 
@@ -46,6 +61,7 @@ export default function ContactForm() {
         </div>
 
         <form
+          id={FORM_ID}
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-5"
           noValidate

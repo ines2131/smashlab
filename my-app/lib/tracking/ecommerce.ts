@@ -1,6 +1,5 @@
 import { CartItem, CartProduct } from "@/types/cart";
 import { pushToDataLayer } from "./dataLayer";
-import Order from "@/models/Order";
 
 const CURRENCY = "HKD";
 
